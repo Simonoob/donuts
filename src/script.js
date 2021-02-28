@@ -1,6 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
 import * as dat from 'dat.gui'
 
 /**
@@ -159,9 +159,9 @@ window.addEventListener('mousemove', (event) =>
 let mobileControlsEnabled = false
 //mobile ==> orbit controls
 if (window.innerWidth<900) {
-    controls = new OrbitControls( camera, canvas );
+    controls = new TrackballControls( camera, canvas );
     controls.enableDamping = true
-    controls.dampingFactor = 0.009;
+    controls.dynamicDampingFactor = 0.09;
     controls.enableZoom = false;
     mobileControlsEnabled = true
     camera.position.z = 5
