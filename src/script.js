@@ -162,6 +162,8 @@ if (window.innerWidth<900) {
     controls = new TrackballControls( camera, canvas );
     controls.enableDamping = true
     controls.dynamicDampingFactor = 0.09;
+    controls.maxDistance = 10;
+    controls.minDistance = 1;
     controls.enableZoom = false;
     mobileControlsEnabled = true
     camera.position.z = 5
