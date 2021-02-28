@@ -44,6 +44,7 @@ let donutsAmount = {
     number :  1000
 }
 let allObjRemoved = false
+let controls
 
 const fontLoader = new THREE.FontLoader();
 fontLoader.load(
@@ -155,13 +156,15 @@ window.addEventListener('mousemove', (event) =>
     cursor.y = - (event.clientY / sizes.height - 0.5)
 })
 
-let orbitControlsEnabled = false
+let mobileControlsEnabled = false
 //mobile ==> orbit controls
 if (window.innerWidth<900) {
-    const orbitControls = new OrbitControls(camera, canvas)
-    orbitControls.enableDamping = true   
-    orbitControlsEnabled = true
-    console.log("widnow size less than 900px: ", window.innerWidth)
+    controls = new OrbitControls( camera, canvas );
+    controls.enableDamping = true
+    controls.dampingFactor = 0.009;
+    controls.enableZoom = false;
+    mobileControlsEnabled = true
+    camera.position.z = 5
 }
 
 scene.add(camera)
@@ -194,13 +197,9 @@ const tick = () =>
 
     // Update camera
 
-    if (orbitControlsEnabled === true) {
-    camera.position.x = Math.sin(0 -elapsedTime) * 3
-    camera.position.y = Math.sin(0 +elapsedTime) * 2
-    camera.position.z = Math.sin(0 * Math.PI +elapsedTime/10) *10
+    if (mobileControlsEnabled === true && window.innerWidth<900) {
     //update orbitControls
-    //TO FIX
-    // orbitControls.update()
+    controls.update();
     }else{
         camera.position.x = Math.sin(cursor.x -elapsedTime) * 3
         camera.position.y = Math.sin(cursor.y +elapsedTime) * 2
